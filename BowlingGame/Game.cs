@@ -12,24 +12,33 @@
 
         public int Score()
         {
-            int s = 0;
-            int i = 0;
+            int result = 0;
+            int currentIndex = 0;
+            const int bonus = 10;
 
             for (int f = 0; f < 10; f++)
             {
-                if (rolls[i] + rolls[i + 1] == 10)
+                if (rolls[currentIndex] == 10)
                 {
-                    s += 10 + rolls[i + 2];
+                    result += bonus + rolls[currentIndex + 1] + rolls[currentIndex + 2];
+                    currentIndex = currentIndex+1;
                 }
                 else
                 {
-                    s += rolls[i] + rolls[i + 1];
-                }
+                    if (rolls[currentIndex] + rolls[currentIndex + 1] == 10)
+                    {
+                        result += bonus + rolls[currentIndex + 2];
+                    }
+                    else
+                    {
+                        result += rolls[currentIndex] + rolls[currentIndex + 1];
+                    }
 
-                i = i + 2;
+                    currentIndex = currentIndex + 2;
+                }
             }
 
-            return s;
+            return result;
         }
     }
 }
